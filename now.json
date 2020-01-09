@@ -1,0 +1,7 @@
+{
+  "name": "arena-channel-rss",
+  "version": 2,
+  "rewrites": [
+    { "source": "/feed/(.*)", "destination": "/api/feed" }
+  ]
+}
