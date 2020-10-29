@@ -1,7 +1,7 @@
 const RSS = require('rss')
 const Arena = require('are.na')
 
-const arena = new Arena()
+const arena = new Arena({ accessToken: process.env.ARENA_TOKEN })
 const arenaURL = 'https://www.are.na'
 let feed = {}
 
