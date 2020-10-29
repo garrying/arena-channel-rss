@@ -4,8 +4,8 @@ Using [arena-js](https://github.com/ivangreene/arena-js) and [node-rss](https://
 
 ## Usage
 
-`https://arena-rss.now.sh/feed/<channel-slug>`
+`https://arena-rss.vercel.app/feed/<channel-slug>`
 
 ## Deploy Your Own
 
-[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/garrying/arena-channel-rss/tree/master)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/project?template=https://github.com/garrying/arena-channel-rss/tree/master)

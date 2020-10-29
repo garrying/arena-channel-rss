@@ -2,6 +2,7 @@ const RSS = require('rss')
 const Arena = require('are.na')
 
 const arena = new Arena()
+const arenaURL = 'https://www.are.na'
 let feed = {}
 
 const arenaChannelMeta = (channelSlug, reqHostname) => {
@@ -19,7 +20,7 @@ const arenaChannelMeta = (channelSlug, reqHostname) => {
       feed = new RSS({
         title: `Are.na / ${chan.title}`,
         description: chanDescription(),
-        site_url: `https://www.are.na/${chan.user.slug}/${chan.slug}`,
+        site_url: `${arenaURL}/${chan.user.slug}/${chan.slug}`,
         language: 'en',
         image_url: 'https://d2hp0ptr16qg89.cloudfront.net/assets/127302a/touch-icon-iphone-retina.png',
         generator: 'Are.na Channel to RSS',
@@ -33,7 +34,7 @@ const arenaChannelBlocksContents = item => {
   if (item.class === 'Text') {
     return `${item.content_html}`
   } else if (item.class === 'Channel') {
-    return `<a href="https://www.are.na/${item.user.slug}/${item.slug}" target="_blank">https://www.are.na/${item.user.slug}/${item.slug}</a>`
+    return `<a href="${arenaURL}/${item.user.slug}/${item.slug}" target="_blank">${arenaURL}/${item.user.slug}/${item.slug}</a>`
   } else if (item.class === 'Media') {
     return `${item.embed.html}`
   } else if (item.class === 'Attachment') {
@@ -55,8 +56,8 @@ const arenaChannelBlocks = channelName => {
       chan.map(item => {
         feed.item({
           title: item.title,
-          guid: `https://www.are.na/block/${item.id}`,
-          url: `https://www.are.na/block/${item.id}`,
+          guid: `${arenaURL}/block/${item.id}`,
+          url: `${arenaURL}/block/${item.id}`,
           description: arenaChannelBlocksContents(item),
           author: item.user.username,
           date: new Date(item.created_at)
