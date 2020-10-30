@@ -12,4 +12,4 @@ Using [arena-js](https://github.com/ivangreene/arena-js) and [node-rss](https://
 
 ### Private Channels:
 1. Register a new application on Are.na at [dev.are.na](https://dev.are.na/), and get the `Personal Access Token`
-2. Add `ARENA_TOKEN` to your project's enviroment variables, copy/paste the access generated token
+2. Add `ARENA_TOKEN` to your project's enviroment variables, copy/paste the generated access token
