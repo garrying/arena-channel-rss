@@ -22,9 +22,9 @@ const arenaChannelMeta = (channelSlug, reqHostname) => {
         description: chanDescription(),
         site_url: `${arenaURL}/${chan.user.slug}/${chan.slug}`,
         language: 'en',
-        image_url: 'https://d2hp0ptr16qg89.cloudfront.net/assets/127302a/touch-icon-iphone-retina.png',
+        image_url: `https://${reqHostname}/assets/icon.png`,
         generator: 'Are.na Channel to RSS',
-        feed_url: `http://${reqHostname}/api/feed`
+        feed_url: `https://${reqHostname}/feed/${chan.slug}`
       })
     })
     .catch(err => console.log(err))
@@ -74,7 +74,7 @@ async function feedRequest (req, res) {
   return arenaChannelMeta(chanSlug, reqHostname).then(() => {
     return arenaChannelBlocks(chanSlug)
   }).then(() => {
-    res.send(feed.xml())
+    res.send(feed.xml({ indent: true }))
   })
 }
 
