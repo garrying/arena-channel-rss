@@ -69,7 +69,7 @@ const arenaChannelBlocks = channelName => {
 
 async function feedRequest (req, res) {
   const chanSlug = req.url.replace('/feed/', '')
-  const reqHostname = req.headers['x-now-deployment-url']
+  const reqHostname = req.headers['x-vercel-deployment-url']
 
   return arenaChannelMeta(chanSlug, reqHostname).then(() => {
     return arenaChannelBlocks(chanSlug)
