@@ -4,12 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "are.na": "^0.1.4",
     "rss": "^1.2.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-xml": "^0.4.0",
+    "mocha": "^8.2.0",
+    "node-fetch": "^2.6.1",
+    "test-listen": "^1.1.0",
+    "vercel-node-server": "^2.2.1",
+    "xml2js": "^0.4.23"
   }
 }
