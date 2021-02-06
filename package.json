@@ -9,13 +9,13 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "are.na": "^0.1.4",
+    "are.na": "^0.1.5",
     "rss": "^1.2.2"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
+    "chai": "^4.3.0",
     "chai-xml": "^0.4.0",
-    "mocha": "^8.2.0",
+    "mocha": "^8.2.1",
     "node-fetch": "^2.6.1",
     "test-listen": "^1.1.0",
     "vercel-node-server": "^2.2.1",
