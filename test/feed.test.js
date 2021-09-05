@@ -10,7 +10,7 @@ const parser = new xml2js.Parser()
 
 const createServer = require('vercel-node-server').createServer
 const listen = require('test-listen')
-const fetch = require('node-fetch')
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
 
 let server
 let url
