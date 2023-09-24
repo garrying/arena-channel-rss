@@ -53,7 +53,7 @@ const arenaChannelBlocks = channelName => {
     .channel(channelName)
     .contents({ direction: 'desc' })
     .then(chan => {
-      chan.map(item => {
+      chan.map(item =>
         feed.item({
           title: item.title,
           guid: `${arenaURL}/block/${item.id}`,
@@ -62,7 +62,7 @@ const arenaChannelBlocks = channelName => {
           author: item.user.username,
           date: new Date(item.created_at)
         })
-      })
+      )
     })
     .catch(err => console.log(err))
 }
