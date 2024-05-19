@@ -1,42 +1,39 @@
-const feed = require('../api/feed')
+const feed = require("../api/feed");
+const request = require("supertest");
+const parser = require("xml2js").Parser();
+const { createServer } = require("vercel-node-server");
 
-const chai = require('chai')
-const expect = require('chai').expect
-const chaiXml = require('chai-xml')
-chai.use(chaiXml)
+let app;
 
-const xml2js = require('xml2js')
-const parser = new xml2js.Parser()
+beforeAll(async () => {
+  app = createServer(feed);
+});
 
-const createServer = require('vercel-node-server').createServer
-const listen = require('test-listen')
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
+afterAll(() => {
+  app.close();
+});
 
-let server
-let url
+describe("Feed returns the expected responses", () => {
+  it("Should be valid XML", async () => {
+    const response = await request(app)
+      .get("/feed/arena-influences")
+      .expect("Content-Type", "application/rss+xml;charset=utf-8")
+      .expect(200);
+    const responseXML = response.text;
+    const parsedXML = await parser.parseStringPromise(responseXML);
+    expect(parsedXML).toBeTruthy();
+  });
 
-before(async () => {
-  server = createServer(feed)
-  url = await listen(server)
-})
-
-after(() => {
-  server.close()
-})
-
-describe('Feed returns the expected responses', async function () {
-  this.timeout(10000)
-
-  it('Should be valid XML', async () => {
-    const response = await fetch(url + '/feed/arena-influences')
-    const responseXML = await response.text()
-    expect(responseXML).xml.to.be.valid()
-  })
-
-  it('Should present 17 items from a channel', async function () {
-    const response = await fetch(url + '/feed/protocol-platform-peers')
-    const responseXML = await response.text()
-    const feedItems = await parser.parseStringPromise(responseXML).then((result) => result.rss.channel[0].item)
-    expect(feedItems).to.have.lengthOf(17)
-  })
-})
+  it("Should present 17 items from a channel", async function () {
+    const response = await request(app)
+      .get("/feed/protocol-platform-peers")
+      .expect("Content-Type", "application/rss+xml;charset=utf-8")
+      .expect("Content-Length", "15986")
+      .expect(200);
+    const responseXML = response.text;
+    const feedItems = await parser
+      .parseStringPromise(responseXML)
+      .then((result) => result.rss.channel[0].item);
+    expect(feedItems).toHaveLength(17);
+  });
+});
