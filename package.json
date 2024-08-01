@@ -18,7 +18,7 @@
     "eslint": "^9.6.0",
     "eslint-plugin-jest": "^28.6.0",
     "eslint-plugin-n": "^17.9.0",
-    "globals": "^15.7.0",
+    "globals": "^15.9.0",
     "jest": "^29.7.0",
     "supertest": "^7.0.0",
     "vercel-node-server": "^2.2.1",
