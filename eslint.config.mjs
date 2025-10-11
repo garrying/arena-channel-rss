@@ -8,11 +8,10 @@ export default [
     files: ["**/*.js"],
     languageOptions: { sourceType: "commonjs" },
     rules: {
-      "n/no-unpublished-require": [
+      "n/no-unpublished-import": [
         "error",
         {
           allowModules: ["xml2js", "vercel-node-server", "supertest"],
-          tryExtensions: [".js"],
         },
       ],
     },

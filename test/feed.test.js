@@ -1,7 +1,7 @@
-const feed = require("../api/feed");
-const request = require("supertest");
-const parser = require("xml2js").Parser();
-const { createServer } = require("vercel-node-server");
+import feed from "../api/feed.js";
+import request from "supertest";
+import { parseStringPromise } from "xml2js";
+import { createServer } from "vercel-node-server";
 
 let app;
 
@@ -20,7 +20,7 @@ describe("Feed returns the expected responses", () => {
       .expect("Content-Type", "application/rss+xml;charset=utf-8")
       .expect(200);
     const responseXML = response.text;
-    const parsedXML = await parser.parseStringPromise(responseXML);
+    const parsedXML = await parseStringPromise(responseXML);
     expect(parsedXML).toBeTruthy();
   });
 
@@ -31,8 +31,7 @@ describe("Feed returns the expected responses", () => {
       .expect("Content-Length", "15986")
       .expect(200);
     const responseXML = response.text;
-    const feedItems = await parser
-      .parseStringPromise(responseXML)
+    const feedItems = await parseStringPromise(responseXML)
       .then((result) => result.rss.channel[0].item);
     expect(feedItems).toHaveLength(17);
   });
